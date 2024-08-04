@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Book Store</title>
+    <link rel="stylesheet" href="p13.css"/>
+</head>
+<body>
+    <script>
+        function validateForm() {
+            var name = document.forms["myForm"]["name"].value;
+            var stid = document.forms["myForm"]["stid"].value;
+            
+            if (name == "") {
+                alert("Name must be filled out");
+                return false;
+            }
+            if (stid == "") {
+                alert("Student Id must be filled out");
+                return false;
+            }
+            // Hide the first card and show the second one
+            document.querySelector('.card').style.display = 'none';
+            document.querySelector('.card1').style.display = 'block';
+            return false; // Prevent form submission
+        }
+
+        function validateForm1() {
+            var i1 = document.forms["myForm1"]["i1"].value;
+            var i2 = document.forms["myForm1"]["i2"].value;
+            var i3 = document.forms["myForm1"]["i3"].value;
+            var i4 = document.forms["myForm1"]["i4"].value;
+            var i5 = document.forms["myForm1"]["i5"].value;
+            
+            if(i1>10) {
+                alert("Less Compiler Design book is available");
+                return false;
+            }
+            if(i2>12) {
+                alert("Less Software Engineering book is available");
+                return false;
+            }
+            if(i3>8) {
+                alert("Less Computer Networks book is available");
+                return false;
+            }
+            if(i4>13) {
+                alert("Less Web Development book is available");
+                return false;
+            }
+            if(i5>7) {
+                alert("Less Data Mining book is available");
+                return false;
+            }
+            // Call generateBill() to generate the bill content
+            generateBill();
+            // Hide the second card
+            document.querySelector('.card1').style.display = 'none';
+            // Show the third card
+            document.querySelector('.card2').style.display = 'block';
+            return false; // Prevent form submission
+        }
+        function generateBill() {
+            var name = document.forms["myForm"]["name"].value;
+        var stid = document.forms["myForm"]["stid"].value;
+
+        var i1 = parseInt(document.forms["bookForm"]["i1"].value);
+        var i2 = parseInt(document.forms["bookForm"]["i2"].value);
+        var i3 = parseInt(document.forms["bookForm"]["i3"].value);
+        var i4 = parseInt(document.forms["bookForm"]["i4"].value);
+        var i5 = parseInt(document.forms["bookForm"]["i5"].value);
+
+        var price1 = 20; // Price for Compiler Design
+        var price2 = 25; // Price for Software Engineering
+        var price3 = 30; // Price for Computer Networks
+        var price4 = 22; // Price for Web Development
+        var price5 = 18; // Price for Data Mining
+
+        var totalCost =
+          i1 * price1 + i2 * price2 + i3 * price3 + i4 * price4 + i5 * price5;
+
+        var billContent = `
+                <h2 align="center">Bill</h2>
+                <p>Name: ${name}</p>
+                <p>Student ID: ${stid}</p>
+                <p>Books:</p>
+                <ul>
+                    <li>Compiler Design - Quantity: ${i1} - Cost: $${i1 * price1}</li>
+                    <li>Software Engineering - Quantity: ${i2} - Cost: $${i2 * price2}</li>
+                    <li>Computer Networks - Quantity: ${i3} - Cost: $${i3 * price3}</li>
+                    <li>Web Development - Quantity: ${i4} - Cost: $${i4 * price4}</li>
+                    <li>Data Mining - Quantity: ${i5} - Cost: $${i5 * price5}</li>
+                </ul>
+                <p>Total Cost: $${totalCost}</p>
+            `;
+
+        document.getElementById("bill").innerHTML = billContent;
+        document.querySelector('.card1').style.display = 'none';
+        document.querySelector(".card2").style.display = "block";
+
+        return false; // Prevent form submission
+
+        }
+    </script>
+
+    <div class="card">
+        <form name="myForm" onsubmit="return validateForm()" method="get">
+            <h2 align="center">Book Store</h2>
+            <p>
+                Name: 
+                <input type="text" name="name" id="name" maxlength="20"/>
+            </p>
+            <p>
+                Student ID: 
+                <input type="text" name="stid" id="stid" maxlength="20"/>
+            </p>
+            <br/>
+            <center><input type="submit" value="Enter" /></center>
+        </form>   
+    </div>
+
+    <div class="card1" style="display: none">
+        <form name="bookForm" onsubmit="return generateBill()" method="get">
+          <br />
+          <table border="3" align="center">
+            <tr>
+              <b>
+                <td>S.No.</td>
+                <td>Book Name</td>
+                <td>Available Books</td>
+                <td>Price (per book)</td>
+                <td>Quantity Required</td>
+              </b>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>Compiler Design</td>
+              <td>10</td>
+              <td>$20</td>
+              <td><input type="text" name="i1" id="i1" /></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Software Engineering</td>
+              <td>12</td>
+              <td>$25</td>
+              <td><input type="text" name="i2" id="i2" /></td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Computer Networks</td>
+              <td>8</td>
+              <td>$30</td>
+              <td><input type="text" name="i3" id="i3" /></td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Web Development</td>
+                <td>13</td>
+                <td>$22</td>
+                <td><input type="text" name="i4" id="i4" /></td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>Data Mining</td>
+                <td>7</td>
+                <td>$18</td>
+                <td><input type="text" name="i5" id="i5" /></td>
+              </tr>
+            </table>
+            <br />
+            <center><input type="submit" value="Submit" /></center>
+          </form>
+        </div>
+    
+    <div class="card2" style="display:none;" id="bill">
+        
+    </div>
+</body>
+</html>
